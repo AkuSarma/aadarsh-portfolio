@@ -200,7 +200,7 @@ export default function PortfolioPage() {
                     </div>
                     <div className="flex justify-center items-center fade-in-up" style={{transitionDelay: '150ms'}}>
                         <Image
-                            src="/aadarsh.png"
+                            src="/Aadarah_dubey.jpeg"
                             alt="Aadarsh Kumar Dubey"
                             width={400}
                             height={400}
