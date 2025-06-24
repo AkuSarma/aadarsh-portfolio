@@ -1,5 +1,3 @@
-# Firebase Studio
+Aadarsh ka portfolio website 
 
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
+host karne ko he nahi ata use
