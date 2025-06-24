@@ -39,7 +39,7 @@ const projectsData = [
     technologies: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
   },
   {
-    title: 'Resume Saga',
+    title: 'Mood-munch',
     description: 'A generative AI-powered resume generator that uses Google Gemini API to create custom resumes. Features an object detection module to automatically detect ingredients for recipe-style resume storytelling.',
     technologies: ['React', 'Next.js', 'Generative AI', 'Google Gemini API', 'Computer Vision'],
   },
@@ -47,12 +47,12 @@ const projectsData = [
 
 const softSkills = ['Quick Adaptable', 'Flexible', 'Active Listener'];
 const technicalSkills = Array.from(new Set(projectsData.flatMap(p => p.technologies)));
-const achievementsData = ['Participant, ADTU Cricket League – Assam Down Town University, Guwahati'];
+const achievementsData = ['Participant, ADTU Cricket League - Assam Down Town University, Guwahati'];
 const hobbiesData = ['Reading articles', 'Playing cricket'];
 const socialLinks = [
-  { name: 'LinkedIn', href: 'https://l1nk.dev/VKXrR', icon: Linkedin },
-  { name: 'GitHub', href: 'https://github.com/aadarshdubey', icon: Github },
-  { name: 'Instagram', href: '#', icon: Instagram },
+  { name: 'LinkedIn', href: 'https://linkedin.com/in/aadarsh-kumar-067116272', icon: Linkedin },
+  { name: 'GitHub', href: 'https://github.com/Aadarshduby', icon: Github },
+  { name: 'Instagram', href: 'https://www.instagram.com/aadarsh7310', icon: Instagram },
   { name: 'Facebook', href: '#', icon: Facebook },
 ];
 
@@ -194,13 +194,13 @@ export default function PortfolioPage() {
                                 <a href="#contact">Contact Me</a>
                             </Button>
                             <Button size="lg" variant="secondary" asChild>
-                                <a href="/aadarsh_dubey_resume.pdf" download><Download className="mr-2 h-4 w-4" /> Download Resume</a>
+                                <a href="/aadarsh_resume.pdf" download><Download className="mr-2 h-4 w-4" /> Download Resume</a>
                             </Button>
                         </div>
                     </div>
                     <div className="flex justify-center items-center fade-in-up" style={{transitionDelay: '150ms'}}>
                         <Image
-                            src="https://placehold.co/400x400/8F00FF/FFFFFF"
+                            src="/aadarsh.png"
                             alt="Aadarsh Kumar Dubey"
                             width={400}
                             height={400}
