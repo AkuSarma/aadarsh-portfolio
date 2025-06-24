@@ -1,3 +1,3 @@
 Aadarsh ka portfolio website 
 
-host karne ko he nahi ata use
+kyuki use ai use karne nahi ata
