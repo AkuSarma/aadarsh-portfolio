@@ -41,11 +41,12 @@ const projectsData = [
   {
     title: 'Resume Saga',
     description: 'A generative AI-powered resume generator that uses Google Gemini API to create custom resumes. Features an object detection module to automatically detect ingredients for recipe-style resume storytelling.',
-    technologies: ['Generative AI', 'Google Gemini API', 'Computer Vision'],
+    technologies: ['React', 'Next.js', 'Generative AI', 'Google Gemini API', 'Computer Vision'],
   },
 ];
 
-const skillsData = ['Quick Adaptable', 'Flexible', 'Active Listener'];
+const softSkills = ['Quick Adaptable', 'Flexible', 'Active Listener'];
+const technicalSkills = Array.from(new Set(projectsData.flatMap(p => p.technologies)));
 const achievementsData = ['Participant, ADTU Cricket League – Assam Down Town University, Guwahati'];
 const hobbiesData = ['Reading articles', 'Playing cricket'];
 const socialLinks = [
@@ -215,44 +216,38 @@ export default function PortfolioPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="section-title fade-in-up">Education</h2>
             <div className="mt-12 max-w-4xl mx-auto relative">
-              {/* Timeline line */}
               <div className="absolute top-0 h-full w-0.5 bg-accent/30 left-1/2 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
               <div className="absolute top-0 h-full w-0.5 bg-accent/30 left-3 md:hidden" aria-hidden="true"></div>
-
-              <div className="space-y-10">
-                {educationData.map((edu, index) => {
-                  const isLeft = index % 2 === 0;
-                  return (
-                    <div key={index} className="relative fade-in-up" style={{transitionDelay: `${index * 100}ms`}}>
-                      {/* Timeline Dot */}
-                      <div className="absolute top-1 left-3 md:left-1/2 transform -translate-x-1/2">
-                         <span className="flex items-center justify-center w-6 h-6 bg-accent rounded-full ring-8 ring-secondary">
-                           <GraduationCap className="w-3 h-3 text-accent-foreground" />
-                         </span>
-                      </div>
-                      
-                      {/* Content */}
+              <div className="space-y-10 md:space-y-0">
+                {educationData.map((edu, index) => (
+                  <div key={index} className="relative md:grid md:grid-cols-2 md:gap-x-8 md:items-center">
+                    <div className={cn(
+                      "md:col-start-1 md:row-start-1",
+                      index % 2 !== 0 ? "md:col-start-2" : ""
+                    )}>
                       <div className={cn(
-                        "pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-x-8",
+                          "relative p-4 rounded-lg border bg-card text-card-foreground shadow-sm ml-10 md:ml-0 fade-in-up",
+                          index % 2 !== 0 ? "md:ml-auto" : ""
                       )}>
-                        <div className={cn(
-                          "space-y-1",
-                          isLeft ? "md:col-start-1 md:text-right md:pr-10" : "md:col-start-2 md:pl-10"
-                        )}>
-                            <h3 className={cn(
-                              "flex items-center mb-1 text-lg font-semibold text-foreground font-headline",
-                              isLeft && "md:flex-row-reverse"
-                            )}>
-                              {edu.degree}
-                              <span className="text-sm font-medium mx-3 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">{edu.year}</span>
-                            </h3>
-                            <p className="block text-sm font-normal leading-none text-muted-foreground">{edu.institution}</p>
-                            <p className="text-base font-normal text-foreground mt-2">{edu.detail}</p>
-                        </div>
+                         <div className="absolute top-5 -left-12 md:left-auto md:-right-6 transform md:translate-x-1/2">
+                           <span className="flex items-center justify-center w-8 h-8 bg-accent rounded-full ring-8 ring-secondary">
+                             <GraduationCap className="w-4 h-4 text-accent-foreground" />
+                           </span>
+                         </div>
+                        <h3 className="font-headline text-lg font-semibold">{edu.degree}</h3>
+                        <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                        <p className="mt-2">{edu.detail}</p>
                       </div>
                     </div>
-                  );
-                })}
+                    <div className={cn(
+                      "flex items-center justify-start md:justify-end my-2 ml-10 md:ml-0",
+                      "md:col-start-1 md:row-start-1",
+                      index % 2 === 0 ? "md:col-start-2" : "md:justify-start"
+                    )}>
+                       <time className="text-sm font-medium mx-3 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">{edu.year}</time>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -304,32 +299,35 @@ export default function PortfolioPage() {
 
         <section id="skills" className="py-20 md:py-28">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 className="section-title !text-left fade-in-up">Skills & More</h2>
-                        <div className="mt-8 space-y-8">
-                            <div className="fade-in-up" style={{transitionDelay: '100ms'}}>
-                                <h3 className="font-headline text-xl font-semibold">Core Skills</h3>
-                                <div className="mt-4 flex flex-wrap gap-3">
-                                    {skillsData.map(skill => <Badge key={skill} className="text-base px-4 py-2">{skill}</Badge>)}
-                                </div>
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="section-title fade-in-up">Skills & More</h2>
+                    <div className="mt-12 space-y-12">
+                        <div className="fade-in-up" style={{transitionDelay: '100ms'}}>
+                            <h3 className="font-headline text-2xl font-semibold text-center mb-6">Technical Skills</h3>
+                            <div className="flex flex-wrap gap-3 justify-center">
+                                {technicalSkills.map(skill => <Badge key={skill} variant="secondary" className="text-base px-4 py-2">{skill}</Badge>)}
                             </div>
-                            <div className="fade-in-up" style={{transitionDelay: '200ms'}}>
+                        </div>
+                        <div className="fade-in-up" style={{transitionDelay: '200ms'}}>
+                            <h3 className="font-headline text-2xl font-semibold text-center mb-6">Soft Skills</h3>
+                            <div className="flex flex-wrap gap-3 justify-center">
+                                {softSkills.map(skill => <Badge key={skill} className="text-base px-4 py-2">{skill}</Badge>)}
+                            </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-12 pt-4 text-left">
+                            <div className="fade-in-up" style={{transitionDelay: '300ms'}}>
                                 <h3 className="font-headline text-xl font-semibold">Achievements & Activities</h3>
                                 <ul className="mt-4 list-disc list-inside space-y-2 text-muted-foreground">
                                     {achievementsData.map(item => <li key={item}>{item}</li>)}
                                 </ul>
                             </div>
-                            <div className="fade-in-up" style={{transitionDelay: '300ms'}}>
+                            <div className="fade-in-up" style={{transitionDelay: '400ms'}}>
                                 <h3 className="font-headline text-xl font-semibold">Hobbies</h3>
                                 <ul className="mt-4 list-disc list-inside space-y-2 text-muted-foreground">
                                     {hobbiesData.map(item => <li key={item}>{item}</li>)}
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex justify-center fade-in-up" style={{transitionDelay: '200ms'}}>
-                        <Image src="https://placehold.co/600x400" width={600} height={400} alt="Skills visual" className="rounded-lg shadow-xl" data-ai-hint="abstract technology"/>
                     </div>
                 </div>
             </div>
