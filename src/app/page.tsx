@@ -59,6 +59,7 @@ export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sectionsRef = useRef<Record<string, HTMLElement | null>>({});
+  const [currentYear, setCurrentYear] = useState<number>();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -68,6 +69,7 @@ export default function PortfolioPage() {
     } else {
       document.documentElement.classList.add('dark');
     }
+    setCurrentYear(new Date().getFullYear());
   }, []);
   
   const toggleTheme = useCallback(() => {
@@ -336,7 +338,7 @@ export default function PortfolioPage() {
 
       <footer className="border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Aadarsh Kumar Dubey. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {currentYear} Aadarsh Kumar Dubey. All rights reserved.</p>
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
                 <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label={social.name}>
