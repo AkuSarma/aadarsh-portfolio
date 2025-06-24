@@ -10,6 +10,7 @@ import {
   Sun, Moon, Download, Award, Briefcase, GraduationCap, Heart, Mail, Phone,
   Github, Linkedin, Instagram, Facebook, Menu, ExternalLink
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Education', href: '#education' },
@@ -213,20 +214,45 @@ export default function PortfolioPage() {
         <section id="education" className="py-20 md:py-28 bg-secondary">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="section-title fade-in-up">Education</h2>
-            <div className="mt-12 max-w-3xl mx-auto">
-              <div className="relative border-l-2 border-accent/30">
-                {educationData.map((edu, index) => (
-                  <div key={index} className="mb-10 ml-6 fade-in-up" style={{transitionDelay: `${index * 100}ms`}}>
-                    <span className="absolute flex items-center justify-center w-6 h-6 bg-accent rounded-full -left-3 ring-8 ring-secondary">
-                      <GraduationCap className="w-3 h-3 text-accent-foreground" />
-                    </span>
-                    <h3 className="flex items-center mb-1 text-lg font-semibold text-foreground font-headline">{edu.degree}
-                      <span className="text-sm font-medium ml-3 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">{edu.year}</span>
-                    </h3>
-                    <p className="block mb-2 text-sm font-normal leading-none text-muted-foreground">{edu.institution}</p>
-                    <p className="text-base font-normal text-foreground">{edu.detail}</p>
-                  </div>
-                ))}
+            <div className="mt-12 max-w-4xl mx-auto relative">
+              {/* Timeline line */}
+              <div className="absolute top-0 h-full w-0.5 bg-accent/30 left-1/2 -translate-x-1/2 hidden md:block" aria-hidden="true"></div>
+              <div className="absolute top-0 h-full w-0.5 bg-accent/30 left-3 md:hidden" aria-hidden="true"></div>
+
+              <div className="space-y-10">
+                {educationData.map((edu, index) => {
+                  const isLeft = index % 2 === 0;
+                  return (
+                    <div key={index} className="relative fade-in-up" style={{transitionDelay: `${index * 100}ms`}}>
+                      {/* Timeline Dot */}
+                      <div className="absolute top-1 left-3 md:left-1/2 transform -translate-x-1/2">
+                         <span className="flex items-center justify-center w-6 h-6 bg-accent rounded-full ring-8 ring-secondary">
+                           <GraduationCap className="w-3 h-3 text-accent-foreground" />
+                         </span>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className={cn(
+                        "pl-10 md:pl-0 md:grid md:grid-cols-2 md:gap-x-8",
+                      )}>
+                        <div className={cn(
+                          "space-y-1",
+                          isLeft ? "md:col-start-1 md:text-right md:pr-10" : "md:col-start-2 md:pl-10"
+                        )}>
+                            <h3 className={cn(
+                              "flex items-center mb-1 text-lg font-semibold text-foreground font-headline",
+                              isLeft && "md:flex-row-reverse"
+                            )}>
+                              {edu.degree}
+                              <span className="text-sm font-medium mx-3 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">{edu.year}</span>
+                            </h3>
+                            <p className="block text-sm font-normal leading-none text-muted-foreground">{edu.institution}</p>
+                            <p className="text-base font-normal text-foreground mt-2">{edu.detail}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
